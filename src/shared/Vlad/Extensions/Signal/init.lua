@@ -21,9 +21,9 @@ local function GenerateUUID()
     end)
 end
 
-function Signal:Initialize()
+-- function Signal:Initialize()
     
-end
+-- end
 
 function Signal:InitializingModule(Module: {any})
     if Module.SignalsToCreate then
