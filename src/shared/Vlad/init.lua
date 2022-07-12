@@ -16,11 +16,6 @@ function Vlad:Start(AfterStarted: nil | () -> nil): nil
     for Index, ModuleInformation in self.ModulesToStart do
         local RequiredModule = require(ModuleInformation.Module)
 
-        if RequiredModule.Utility and RequiredModule.Utility ~= "Common" then
-            local PreparationModule = require(script.ModuleTypes[RequiredModule.Utility])
-            PreparationModule:Prepare(RequiredModule)
-        end
-
         for _, ModuleInformation in self.StartedModules do
             if ModuleInformation.Utility == "Extension" and ModuleInformation.Module.InitializingModule then
                 ModuleInformation.Module:InitializingModule(RequiredModule)
@@ -38,10 +33,20 @@ function Vlad:Start(AfterStarted: nil | () -> nil): nil
         self.ModulesToStart[Index] = nil
     end
 
+    local LateList = {}
+
     for _, ModuleInformation in self.StartedModules do
         if ModuleInformation.Module.FrameworkStarted then
-            ModuleInformation.Module:FrameworkStarted()
+            if ModuleInformation.Utility == "Extension" then
+                ModuleInformation.Module:FrameworkStarted()
+            else
+                table.insert(LateList, ModuleInformation)
+            end
         end
+    end
+
+    for _, ModuleInformation in LateList do
+        ModuleInformation.Module:FrameworkStarted()
     end
 
     if AfterStarted then
@@ -75,9 +80,10 @@ function Vlad:Get(Name: string): {any}
 
     if not ToReturn then
         warn("No such module", Name)
+        return
+    else
+        return ToReturn.Module
     end
-
-    return ToReturn
 end
 
 return Vlad

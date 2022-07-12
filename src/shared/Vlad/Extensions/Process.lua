@@ -2,17 +2,17 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
 local Vlad = require(ReplicatedStorage.Common.Vlad)
 
-local Signal = {
-    Name = "Signal",
-    Utility = "Common"
+local Process = {
+    Name = "Process",
+    Utility = "Extension"
 }
 
-function Signal:Initialize()
+function Process:Initialize()
     --Something here
 end
 
-function Signal:InitializingModule()
+function Process:FrameworkStarted()
     
 end
 
-return Signal
+return Process

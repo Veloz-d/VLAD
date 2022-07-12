@@ -2,17 +2,22 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
 local Vlad = require(ReplicatedStorage.Common.Vlad)
 
-local module = {
-    Name = "module",
-    Utility = "Common"
+local Test = {
+    Name = "Test",
+    Utility = "Common",
+    ConnectFunctions = {}
 }
 
-function module:Initialize()
-    print("Initializing module")
+function Test:Initialize()
+    --Something here
 end
 
-function module:FrameworkStarted()
-    -- Something here
+function Test:FrameworkStarted()
+    
 end
 
-return module
+function Test.ConnectFunctions:Fart()
+    print(self.Utility)
+end
+
+return Test

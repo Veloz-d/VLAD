@@ -4,15 +4,20 @@ local Vlad = require(ReplicatedStorage.Common.Vlad)
 
 local Hello = {
     Name = "Hello",
-    Utility = "Component"
+    Utility = "Common",
+    SignalsToCreate = {
+        "Fart"
+    }
 }
 
+local Signal
+
 function Hello:Initialize()
-    --Something here
+    Signal = Vlad:Get("Signal")
 end
 
 function Hello:FrameworkStarted()
-    
+    Signal:Fire("Fart")
 end
 
 return Hello
