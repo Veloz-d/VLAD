@@ -1,5 +1,6 @@
 {
   "name": "VLAD",
+  "servePlaceIds": [10158813297],
   "tree": {
     "$className": "DataModel",
 
