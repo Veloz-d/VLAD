@@ -8,16 +8,24 @@ local Test = {
     ConnectFunctions = {}
 }
 
+local Signal
+local States
+
 function Test:Initialize()
-    --Something here
+    Signal = Vlad:Get("Signal")
+    States = Vlad:Get("States")
 end
 
 function Test:FrameworkStarted()
+    local Folder = States:GetFolder("TestFolder")
     
+    Signal:ConnectTo(Folder:GetSignalUUIDs().StateChanged, function(...)
+        print("State Changed", ...)
+    end)
 end
 
-function Test.ConnectFunctions:Fart()
-    print(self.Utility)
+function Test.ConnectFunctions:TestSignal(...)
+    print(...)
 end
 
 return Test

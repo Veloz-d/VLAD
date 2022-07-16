@@ -31,7 +31,16 @@ function States:ExtensionsStarted()
 end
 
 function States:InitializingModule(Module: {any})
-    print("Initializing Module", Module)
+    if Module.FoldersToCreate then
+        local CreatedFolders = {}
+        
+        for Index, FolderName in Module.FoldersToCreate do
+            CreatedFolders[FolderName] = self:CreateFolder(FolderName)
+        end
+
+        Module.CreatedFolders = CreatedFolders
+        Module.FoldersToCreate = nil
+    end
 end
 
 function States:Set(Name, Value)
@@ -52,7 +61,7 @@ function States:Get(Name)
 end
 
 function States:CreateFolder(Name: string?, StarterTable)
-    local NewFolder = FolderTemplate.new(StarterTable)
+    local NewFolder = FolderTemplate.New(StarterTable)
 
     if Name then
         self.StateFolders[Name] = NewFolder
