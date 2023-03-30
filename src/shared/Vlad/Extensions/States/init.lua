@@ -1,4 +1,6 @@
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
 
 local States = {
     Name = "States",
@@ -28,6 +30,16 @@ function States:ExtensionsStarted()
     FolderTemplate = require(script.Folder)
     Signal = Vlad:Get("Signal")
     Signal:Add("StateChanged")
+
+    if RunService:IsServer() then
+        Players.PlayerAdded:Connect(function(Player)
+            self:CreateFolder(Player.Name)
+        end)
+
+        Players.PlayerRemoving:Connect(function(Player)
+            self:RemoveFolder(Player.Name)
+        end)
+    end
 end
 
 function States:InitializingModule(Module: {any})

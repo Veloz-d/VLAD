@@ -2,7 +2,7 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
 local Vlad = require(ReplicatedStorage.Common.Vlad)
 
-local Hello = {
+local Hello = Vlad:Create({
     Name = "Hello",
     Utility = "Common",
 
@@ -13,7 +13,7 @@ local Hello = {
     FoldersToCreate = {
         "TestFolder"
     }
-}
+})
 
 local Signal
 local States

@@ -2,8 +2,7 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
 local Vlad = require(ReplicatedStorage.Common.Vlad)
 
-Vlad:AddModule(ReplicatedStorage.Common.Hello)
-Vlad:AddModule(ReplicatedStorage.Common.Test)
+Vlad:AddModules(ReplicatedStorage.Common.Modules)
 
 Vlad:Start(function()
     print("Started")

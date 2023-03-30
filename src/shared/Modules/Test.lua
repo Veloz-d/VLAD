@@ -2,11 +2,11 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
 local Vlad = require(ReplicatedStorage.Common.Vlad)
 
-local Test = {
+local Test = Vlad:Create({
     Name = "Test",
     Utility = "Common",
     ConnectFunctions = {}
-}
+})
 
 local Signal
 local States
